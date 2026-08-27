@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>You Deserve All The Happiness</title><link rel="stylesheet" href="style.css"></head>
+<body class="surprise-bg">
+<header class="nav">
+  <a class="brand" href="wishes.html">← Back</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="letter.html">Letter</a>
+    <a href="memories.html">Memories</a>
+    <a href="cake.html">Cake</a>
+    <a href="wishes.html">Wishes</a>
+    <a class="active" href="surprise.html">Surprise</a>
+  </nav>
+</header>
+
+<main class="surprise-page">
+  <div class="big-moon">◐</div>
+  <p class="tiny">ONE LAST LITTLE SECRET ♡</p>
+  <h1>You Deserve<br>All The <em>Happiness</em><br>in the World! ♡</h1>
+  <p>May your life be filled with success, good health, endless joy<br>and magical moments. ♡</p>
+
+  <button id="videoBtn" class="round-play" aria-label="Watch your birthday surprise">▶</button>
+  <p class="surprise-label">Watch Your Surprise ♡</p>
+
+  <div id="videoModal" class="video-modal" aria-hidden="true">
+    <div class="video-card">
+      <button id="closeVideo" class="close-video" aria-label="Close video">×</button>
+      <p class="tiny">A LITTLE VIDEO JUST FOR YOU ♡</p>
+      <video id="birthdayVideo" controls playsinline preload="metadata">
+        <source src="/Surprise.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+      <p class="video-note">Put your video at <strong>videos/birthday-surprise.mp4</strong></p>
+    </div>
+  </div>
+</main>
+
+<script>
+const videoBtn=document.getElementById('videoBtn');
+const modal=document.getElementById('videoModal');
+const closeBtn=document.getElementById('closeVideo');
+const video=document.getElementById('birthdayVideo');
+
+function openVideo(){
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden','false');
+  document.body.classList.add('modal-open');
+  video.play().catch(()=>{});
+}
+function closeVideo(){
+  video.pause();
+  video.currentTime=0;
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden','true');
+  document.body.classList.remove('modal-open');
+}
+videoBtn.addEventListener('click',openVideo);
+closeBtn.addEventListener('click',closeVideo);
+modal.addEventListener('click',(e)=>{if(e.target===modal)closeVideo()});
+document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeVideo()});
+</script>
+</body></html>

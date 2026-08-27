@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make a Wish!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="cake-bg">
+
+<header class="nav">
+    <a class="brand" href="memories.html">← Back</a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="letter.html">Letter</a>
+        <a href="memories.html">Memories</a>
+        <a class="active" href="cake.html">Cake</a>
+        <a href="wishes.html">Wishes</a>
+        <a href="surprise.html">Surprise</a>
+    </nav>
+</header>
+
+<main class="cake-page">
+
+    <p class="tiny">YOUR SPECIAL MOMENT</p>
+
+    <h1>Make a <em>Wish!</em></h1>
+
+    <p class="subtitle">
+        Close your eyes, make a wish...<br>
+        and blow the candles! ♡
+    </p>
+
+    <section class="cake-stage">
+
+        <div class="glow g1"></div>
+        <div class="glow g2"></div>
+
+        <div class="candle c1"><i></i></div>
+        <div class="candle c2"><i></i></div>
+        <div class="candle c3"><i></i></div>
+        <div class="candle c4"><i></i></div>
+        <div class="candle c5"><i></i></div>
+
+        <div class="frosting">♥</div>
+
+        <div class="cake-body">
+            <span>
+                Happy<br>
+                Birthday
+            </span>
+        </div>
+
+        <div class="plate"></div>
+
+        <div class="gift gift1">🎁</div>
+        <div class="gift gift2">🎁</div>
+
+    </section>
+
+    <button id="blow" class="blow-btn">
+        💨 Blow the candles!
+    </button>
+
+    <div class="progress">
+        <span id="progress"></span>
+    </div>
+
+    <p id="cakeMsg"></p>
+
+</main>
+
+<script>
+
+const btn = document.getElementById('blow');
+const bar = document.getElementById('progress');
+const msg = document.getElementById('cakeMsg');
+
+btn.onclick = () => {
+
+    // Prevent clicking the button again
+    if (btn.disabled) return;
+
+    // Fill progress bar
+    bar.style.width = '100%';
+
+    // Turn off candles one by one
+    document.querySelectorAll('.candle i').forEach((f, i) => {
+
+        setTimeout(() => {
+
+            f.classList.add('off');
+            smoke(f.parentElement);
+
+        }, i * 140);
+
+    });
+
+    // After candles are blown out
+    setTimeout(() => {
+
+        // Show confetti
+        confetti();
+
+        // Show wish message
+        msg.textContent =
+            '✨ Wish made! May every beautiful thing find its way to you. ✨';
+
+        // Change button text
+        btn.textContent = 'Wish Made ♥';
+
+        // Disable button
+        btn.disabled = true;
+
+        // Move to Wishes page after 2 seconds
+        setTimeout(() => {
+
+            window.location.href = 'wishes.html';
+
+        }, 2000);
+
+    }, 950);
+};
+
+
+// Create smoke effect
+function smoke(c) {
+
+    let s = document.createElement('b');
+
+    s.className = 'smoke';
+
+    c.appendChild(s);
+
+    setTimeout(() => {
+        s.remove();
+    }, 1600);
+
+}
+
+
+// Create confetti effect
+function confetti() {
+
+    let symbols = [
+        '✦',
+        '✧',
+        '♥',
+        '★',
+        '✺',
+        '•'
+    ];
+
+    for (let i = 0; i < 70; i++) {
+
+        let s = document.createElement('span');
+
+        s.className = 'confetti';
+
+        s.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        s.style.left = '50%';
+        s.style.top = '48%';
+
+        s.style.setProperty(
+            '--x',
+            (Math.random() * 900 - 450) + 'px'
+        );
+
+        s.style.setProperty(
+            '--y',
+            (Math.random() * 600 - 250) + 'px'
+        );
+
+        document.body.appendChild(s);
+
+        setTimeout(() => {
+            s.remove();
+        }, 2200);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+```
